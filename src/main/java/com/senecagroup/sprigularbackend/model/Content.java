@@ -16,11 +16,15 @@ public class Content {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CONTENT_ID")
     private Long id;
+
     private ContentType type;
+
     private int index;
+
     @ManyToOne
     @JoinColumn(name = "DOCUMENT_ID")
     private Document document;
+
     @Column(length = 3000)
     private String data;
 
