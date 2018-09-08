@@ -28,3 +28,6 @@ Git Branch 따오고 Merge
     - git add *
     - git commit -m "메세지"
     - git push origin [Branch 이름]
+
+PULL 과 Fetch 의 차이
+    PULL = FETCH + MERGE

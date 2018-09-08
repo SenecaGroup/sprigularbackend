@@ -1,0 +1,11 @@
+
+Model
+    name: String
+    url: URL
+
+    DATA
+        - Model(name=HOME, url=http://localhost:8080/home)
+        - Model(name=ABOUT, url=http://localhost:8080/about)
+        - Model(name=TIPS, url=http://localhost:8080/tips)
+        - Model(name=LANGUAGES, url=http://localhost:8080/languages)
+
