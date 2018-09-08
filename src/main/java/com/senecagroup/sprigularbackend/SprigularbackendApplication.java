@@ -9,4 +9,5 @@ public class SprigularbackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(SprigularbackendApplication.class, args);
     }
+
 }

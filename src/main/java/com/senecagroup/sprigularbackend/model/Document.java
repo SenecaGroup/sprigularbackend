@@ -7,10 +7,16 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+/**
+ * Created by sm123tt@gmail.com on 2018-09-08
+ * Project: sprigularbackend
+ * Github : http://github.com/Siwoo-Kim
+ */
 
 @Entity @Getter @Setter @ToString
 @EqualsAndHashCode(of = {"id", "title"})
@@ -35,4 +41,42 @@ public class Document {
 
     private LocalDateTime createdAt;
 
+//    public void setUpdatedAt(LocalDateTime updatedAt) {
+//        if(createdAt.isAfter(updatedAt)) {
+//            throw new TimeException()
+//        }
+//    }
+    /*
+        @return Last Index of contents
+    */
+    public int nextContentIndex() {
+        int lastIndex = contents
+                .stream()
+                .mapToInt(Content::getIndex)
+                .max()
+                .orElse(0);
+        return lastIndex + 1;
+    }
+
+    /*
+        Adding @argument content to the contents
+        if the index of the content already exists
+        @throw ContentIndexConflictException will occur
+        Set content.Category to this
+        @return the result of the adding content.
+    */
+    private boolean addContent(Content content) {
+        int index = content.getIndex();
+        Optional<Content> foundContent = contents.stream()
+                .filter(_content -> _content.getIndex() == index)
+                .findFirst();
+        if(foundContent.isPresent()) {
+            throw new ContentIndexConflictException("Conflict content index: " + index);
+        }
+        content.setDocument(this);
+        if(!contents.contains(this)) {
+            return contents.add(content);
+        }
+        return false;
+    }
 }

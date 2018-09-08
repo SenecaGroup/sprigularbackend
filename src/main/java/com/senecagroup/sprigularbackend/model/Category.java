@@ -9,6 +9,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by sm123tt@gmail.com on 2018-09-08
+ * Project: sprigularbackend
+ * Github : http://github.com/Siwoo-Kim
+ */
 
 @Entity @Getter @Setter @ToString
 @EqualsAndHashCode(of = "name")
@@ -49,6 +54,7 @@ public class Category {
     }
 
     public boolean addChild(Category child) {
+        //Set child.Parent to this
         child.setParent(this);
         if(!children.contains(child)) {
             return children.add(child);

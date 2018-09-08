@@ -19,3 +19,12 @@ Git 원격으로부터 로컬 저장소 내용 되돌리기
 
 Git Commit 메세지 포맷
     - git commit -m "yyyyMMdd:HH:mm 소문자영문이름 [한줄서머리]"
+
+
+Git Branch 따오고 Merge
+    - git checkout -b [Branch 이름]   //Branch 갱신
+    - git pull // 원격에 맞춘 로컬 갱신
+    - git status // 현재 브랜치 확인
+    - git add *
+    - git commit -m "메세지"
+    - git push origin [Branch 이름]
