@@ -36,10 +36,26 @@ public class Category {
     cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Document> documents = new ArrayList<>();
 
+    /*
+        If the Category contains @argument the document @return true
+        else @return false
+    */
+    public boolean contains(Document document) {
+        return documents.contains(document);
+    }
+
+    /*
+        If the Category contains @argument the child Category @return true
+        else @return false
+    */
+    public boolean contains(Category child) {
+        return children.contains(child);
+    }
+
     public boolean addDocument(Document document) {
         //Set document.Category to this
         document.setCategory(this);
-        if(!documents.contains(document)) {
+        if(!contains(document)) {
             return documents.add(document);
         }
         return false;
@@ -56,7 +72,7 @@ public class Category {
     public boolean addChild(Category child) {
         //Set child.Parent to this
         child.setParent(this);
-        if(!children.contains(child)) {
+        if(!contains(child)) {
             return children.add(child);
         }
         return false;
