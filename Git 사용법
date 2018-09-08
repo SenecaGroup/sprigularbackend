@@ -17,3 +17,5 @@ Git 원격으로부터 로컬 저장소 내용 되돌리기
     - git fetch
     - git reset --hard
 
+Git Commit 메세지 포맷
+    - git commit -m "yyyyMMdd:HH:mm 소문자영문이름 [한줄서머리]"
