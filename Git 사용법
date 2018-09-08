@@ -1,0 +1,15 @@
+
+Git Reference
+    - https://rogerdudler.github.io/git-guide/index.ko.html
+
+Git Repository 생성
+    - git init
+    - git remote add origin [remote 주소] // 원격 서버의 주소를 git 에게 알림
+    - git pull origin --allow-unrelated-histories // 로컬 저장소를 원격 저장소에 맞춰 갱신
+    - git add *
+    - git commit -m "Message" //로컬 Head 에 레파지토리 생성
+    - git push origin master // 변경 내용 발행
+
+Git 원격으로부터 로컬 저장소 내용 되돌리기
+    - git fetch origin
+    - git reset --hard origin/master
