@@ -11,6 +11,7 @@ import java.net.URL;
 @Entity @Getter @Setter @ToString
 public class Model {
 
+    @Id
     private String name;
     private URL url;
 

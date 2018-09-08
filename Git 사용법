@@ -10,6 +10,10 @@ Git Repository 생성
     - git commit -m "Message" //로컬 Head 에 레파지토리 생성
     - git push origin master // 변경 내용 발행
 
+Git Repository 원격에서 다운
+    - git clone 사용자명@호스트:/원격/저장소/경로
+
 Git 원격으로부터 로컬 저장소 내용 되돌리기
-    - git fetch origin
-    - git reset --hard origin/master
+    - git fetch
+    - git reset --hard
+
