@@ -51,4 +51,9 @@ public class Content {
         return lastIndex;
     }
 
+    public void setDocument(Document document) {
+        this.document = document;
+        setIndexFromDocument();
+    }
+
 }

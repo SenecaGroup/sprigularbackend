@@ -77,9 +77,8 @@ public class Document {
         if(content.getIndex() != null) {
             throw new ContentIndexConflictException("Not added content must not have index");
         }
-        content.setDocument(this);
         if(!contents.contains(this)) {
-            content.setIndexFromDocument();
+            content.setDocument(this);
             return contents.add(content);
         }
         return false;
