@@ -47,6 +47,7 @@ public class Content {
     public int setIndexFromDocument() {
         Assert.notNull(document, "Document must not null");
         int lastIndex = document.nextContentIndex();
+        System.out.println(lastIndex);
         this.setIndex(lastIndex);
         return lastIndex;
     }

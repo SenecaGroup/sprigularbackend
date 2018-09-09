@@ -46,6 +46,8 @@ public class Document {
 //            throw new TimeException()
 //        }
 //    }
+    public static final int INDEX_NOT_FOUND = -1;
+
     /*
         @return Last Index of contents + 1
         If there is no content, it returns 1
@@ -55,8 +57,8 @@ public class Document {
                 .stream()
                 .mapToInt(Content::getIndex)
                 .max()
-                .orElse(0);
-        return lastIndex == 0? 0: lastIndex + 1;
+                .orElse(INDEX_NOT_FOUND);
+        return lastIndex == INDEX_NOT_FOUND? 0: lastIndex + 1;
     }
 
     /*
@@ -66,7 +68,7 @@ public class Document {
         Set content.Category to this
         @return the result of the adding content.
     */
-    private boolean addContent(Content content) {
+    public boolean addContent(Content content) {
 //        int index = content.getIndex();
 //        Optional<Content> foundContent = contents.stream()
 //                .filter(_content -> _content.getIndex() == index)
@@ -74,10 +76,7 @@ public class Document {
 //        if(foundContent.isPresent()) {
 //            throw new ContentIndexConflictException("Conflict content index: " + index);
 //        }
-        if(content.getIndex() != null) {
-            throw new ContentIndexConflictException("Not added content must not have index");
-        }
-        if(!contents.contains(this)) {
+        if(!contents.contains(this) && content.getIndex() == null) {
             content.setDocument(this);
             return contents.add(content);
         }
