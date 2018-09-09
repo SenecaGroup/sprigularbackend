@@ -15,8 +15,8 @@ import java.util.List;
  * Github : http://github.com/Siwoo-Kim
  */
 
-@Entity @Getter @Setter @ToString
-@EqualsAndHashCode(of = "name")
+@Entity @Getter @Setter @ToString(exclude = "parent")
+@EqualsAndHashCode(of = {"name"})
 public class Category {
 
     @Id

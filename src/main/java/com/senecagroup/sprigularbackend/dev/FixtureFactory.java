@@ -1,6 +1,8 @@
 package com.senecagroup.sprigularbackend.dev;
 
+import com.senecagroup.sprigularbackend.model.Category;
 import com.senecagroup.sprigularbackend.model.Model;
+import org.hibernate.boot.jaxb.hbm.internal.CacheAccessTypeConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,36 @@ public class FixtureFactory {
         }catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Category> fixtureCategories()  {
+        List<Category> categories = new ArrayList<>();
+        Category category = new Category();
+        category.setName("LANGUAGES");
+        Category child = new Category();
+        child.setName("JAVA");
+        category.addChild(child);
+        child = new Category();
+        child.setName("JAVASCRIPT");
+        category.addChild(child);
+        child = new Category();
+        child.setName("HTML");
+        category.addChild(child);
+        categories.add(category);
+
+        category = new Category();
+        category.setName("Database");
+        child = new Category();
+        child.setName("MongoDB");
+        category.addChild(child);
+        child = new Category();
+        child.setName("Oracle");
+        category.addChild(child);
+        child = new Category();
+        child.setName("Postgresql");
+        category.addChild(child);
+        categories.add(category);
+
+        return categories;
     }
 }

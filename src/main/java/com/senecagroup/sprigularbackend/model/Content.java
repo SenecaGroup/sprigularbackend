@@ -1,5 +1,6 @@
 package com.senecagroup.sprigularbackend.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +15,7 @@ import javax.persistence.*;
  */
 
 @Entity @Getter @Setter @ToString
+@EqualsAndHashCode(of = "id")
 public class Content {
 
     public enum ContentType {
@@ -26,7 +28,7 @@ public class Content {
 
     private ContentType type;
 
-    private int index;
+    private Integer index;
 
     @ManyToOne
     @JoinColumn(name = "DOCUMENT_ID")

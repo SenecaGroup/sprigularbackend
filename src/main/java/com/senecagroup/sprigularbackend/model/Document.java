@@ -47,7 +47,8 @@ public class Document {
 //        }
 //    }
     /*
-        @return Last Index of contents
+        @return Last Index of contents + 1
+        If there is no content, it returns 1
     */
     public int nextContentIndex() {
         int lastIndex = contents
@@ -55,7 +56,7 @@ public class Document {
                 .mapToInt(Content::getIndex)
                 .max()
                 .orElse(0);
-        return lastIndex + 1;
+        return lastIndex == 0? 0: lastIndex + 1;
     }
 
     /*
@@ -66,15 +67,19 @@ public class Document {
         @return the result of the adding content.
     */
     private boolean addContent(Content content) {
-        int index = content.getIndex();
-        Optional<Content> foundContent = contents.stream()
-                .filter(_content -> _content.getIndex() == index)
-                .findFirst();
-        if(foundContent.isPresent()) {
-            throw new ContentIndexConflictException("Conflict content index: " + index);
+//        int index = content.getIndex();
+//        Optional<Content> foundContent = contents.stream()
+//                .filter(_content -> _content.getIndex() == index)
+//                .findFirst();
+//        if(foundContent.isPresent()) {
+//            throw new ContentIndexConflictException("Conflict content index: " + index);
+//        }
+        if(content.getIndex() != null) {
+            throw new ContentIndexConflictException("Not added content must not have index");
         }
         content.setDocument(this);
         if(!contents.contains(this)) {
+            content.setIndexFromDocument();
             return contents.add(content);
         }
         return false;
