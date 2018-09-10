@@ -31,3 +31,17 @@ Git Branch 따오고 Merge
 
 PULL 과 Fetch 의 차이
     PULL = FETCH + MERGE
+
+Git Branch
+git checkout -b [Branch 이름] // 브런치 생성
+git checkout [Branch 이름] // 브런치 전화
+git branch -d [Branch 이름] // 브런치 삭제
+git branch // Branches 확인
+git status // 현재 Branch 확인
+
+Git Push 순서
+1. git status
+2. git checkout [Branch 이름]
+3. git add 올릴 파일의 주소 ex) src/main/java/com/senecagroup/sprigularbackend/model/Category.java
+4. git commit -m ""yyyyMMdd:HH:mm 소문자영문이름 [한줄서머리]""
+5. git push origin [Branch 이름]
