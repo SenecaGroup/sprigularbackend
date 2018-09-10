@@ -54,20 +54,20 @@ public class TestDocument {
     @Test
     public void nextContentIndexTest(){
         Document document = documents.get(0);
-        assertTrue(document.nextContentIndex() == 1);
+        assertTrue(document.nextContentIndex() == 0);
         Content content1 = new Content();
         content1.setDocument(document);
         content1.setIndexFromDocument();
         // => 1
         document.getContents().add(content1);
         System.out.println(document.nextContentIndex());
-        assertTrue(document.nextContentIndex() == 2);
+        assertTrue(document.nextContentIndex() == 1);
         Content content2 = new Content();
         // => index = 0
         content2.setDocument(document);
         content2.setIndexFromDocument();
         document.getContents().add(content2);
-        assertTrue(document.nextContentIndex() == 3);
+        assertTrue(document.nextContentIndex() == 2);
     }
 
 //    private boolean addContent(Content content) {
