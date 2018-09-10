@@ -1,0 +1,29 @@
+Spring
+실행 gradle > task > application > bootRun > right click > run
+
+포트 충동시 변경 방법
+resources > application.properties > "server.port=XXXX" 입력
+
+파일 생성시 생서자 입력
+ctrl + shift + a > file temple
+각각 필요한 것을 선택할것
+/**
+ * Created by sm123tt@gmail.com on ${DATE}
+ * Project: ${projectName}
+ * Github : http://github.com/Siwoo-Kim
+ */
+
+lombok 활성화
+setting > Build > Compiler > Annotation Processors > "Enable annotation processing"  check
+
+SHORTCUTS
+Ctrl + b : Declaration 확인
+Alt + Enter : 자동 고침
+Ctrl + Space : 자동완성, spotlite 단축키를 끔
+Shift + Ctrl + Space : 스마트 자동완성
+Shift + Shift : 파일 찾기
+
+
+
+
+
