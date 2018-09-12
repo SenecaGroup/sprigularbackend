@@ -1,4 +1,4 @@
-package com.senecagroup.sprigularbackend.model;
+package com.senecagroup.sprigularbackend.domain;
 
 /**
  * Created by sm123tt@gmail.com on 2018-09-08

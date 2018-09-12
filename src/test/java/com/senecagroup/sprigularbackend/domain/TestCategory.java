@@ -1,4 +1,4 @@
-package com.senecagroup.sprigularbackend.model;
+package com.senecagroup.sprigularbackend.domain;
 
 import org.junit.Before;
 import org.junit.Test;

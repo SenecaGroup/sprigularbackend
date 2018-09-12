@@ -1,4 +1,4 @@
-package com.senecagroup.sprigularbackend.model;
+package com.senecagroup.sprigularbackend.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,10 +22,11 @@ public class Content {
         CODE, NORMAL
     }
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CONTENT_ID")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private ContentType type;
 
     private Integer index;

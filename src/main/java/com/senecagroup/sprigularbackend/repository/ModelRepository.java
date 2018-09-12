@@ -1,6 +1,6 @@
 package com.senecagroup.sprigularbackend.repository;
 
-import com.senecagroup.sprigularbackend.model.Model;
+import com.senecagroup.sprigularbackend.domain.Model;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

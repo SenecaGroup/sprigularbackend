@@ -1,4 +1,4 @@
-package com.senecagroup.sprigularbackend.model;
+package com.senecagroup.sprigularbackend.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,7 +10,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by sm123tt@gmail.com on 2018-09-08
@@ -36,6 +35,10 @@ public class Document {
     @OneToMany(mappedBy = "document",
     orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Content> contents = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "DOCUMENT_ID")
+    private List<Image> images = new ArrayList<>();
 
     private LocalDateTime updatedAt;
 

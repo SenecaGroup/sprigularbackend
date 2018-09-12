@@ -1,11 +1,13 @@
 package com.senecagroup.sprigularbackend.dev;
 
-import com.senecagroup.sprigularbackend.model.Category;
-import com.senecagroup.sprigularbackend.model.Model;
-import org.hibernate.boot.jaxb.hbm.internal.CacheAccessTypeConverter;
+import com.senecagroup.sprigularbackend.domain.Category;
+import com.senecagroup.sprigularbackend.domain.Model;
+import com.senecagroup.sprigularbackend.repository.CategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,6 +25,16 @@ public class FixtureFactory {
     @Value("${app.hostname}")
     private URL url;
     public static final char URL_SEPARATOR = '/';
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Run");
+        categoryRepository.saveAll(fixtureCategories());
+        System.out.println(categoryRepository.findAll());
+    }
 
 
     public List<Model> fixtureModels() {
@@ -77,7 +89,8 @@ public class FixtureFactory {
         child.setName("Postgresql");
         category.addChild(child);
         categories.add(category);
-
         return categories;
     }
+
+
 }
