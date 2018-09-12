@@ -1,4 +1,4 @@
-package com.senecagroup.sprigularbackend.model;
+package com.senecagroup.sprigularbackend.domain;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,6 @@ import static junit.framework.TestCase.assertTrue;
  * Github : http://github.com/SangJun-GitHub
  */
 public class TestDocument {
-
     List<Document> documents = new ArrayList<>();
 
     @Before

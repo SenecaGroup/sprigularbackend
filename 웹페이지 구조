@@ -9,6 +9,10 @@ Model
         - Model(name=TIPS, url=http://localhost:8080/tips)
         - Model(name=LANGUAGES, url=http://localhost:8080/languages)
 
+Category
+    name: String
+    children: List<Category>
+    documents:
 Category(name=LANGUAGES, children=[Category(name=JAVA, children=[], documents=[]),
 Category(name=JAVASCRIPT, children=[], documents=[]), Category(name=HTML, children=[], documents=[])], documents=[])
 Category(name=Database, children=[Category(name=MongoDB, children=[], documents=[]), Category(name=Oracle, children=[], documents=[]), Category(name=Postgresql, children=[], documents=[])], documents=[])
