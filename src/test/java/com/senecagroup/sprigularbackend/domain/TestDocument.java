@@ -15,7 +15,6 @@ import static junit.framework.TestCase.assertTrue;
  * Github : http://github.com/SangJun-GitHub
  */
 public class TestDocument {
-
     List<Document> documents = new ArrayList<>();
 
     @Before
