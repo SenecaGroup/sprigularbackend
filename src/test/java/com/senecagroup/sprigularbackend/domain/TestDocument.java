@@ -22,7 +22,6 @@ public class TestDocument {
         Document document = new Document();
         document.setId(1L);
         documents.add(document);
-
         document = new Document();
         document.setId(2L);
         documents.add(document);
