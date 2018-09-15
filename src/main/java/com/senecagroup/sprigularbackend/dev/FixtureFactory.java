@@ -1,7 +1,9 @@
 package com.senecagroup.sprigularbackend.dev;
 
 import com.senecagroup.sprigularbackend.domain.Category;
+import com.senecagroup.sprigularbackend.domain.Content;
 import com.senecagroup.sprigularbackend.domain.Model;
+import com.senecagroup.sprigularbackend.domain.Document;
 import com.senecagroup.sprigularbackend.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -90,6 +92,31 @@ public class FixtureFactory {
         category.addChild(child);
         categories.add(category);
         return categories;
+    }
+
+
+    public List<Content> fixtureContent(){
+        List<Content> contents = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            Content content = new Content();
+            content.setIndex(i);
+            content.setData("content"+i+"content"+i+"content"+i+"content"+i+"content"+i);
+            contents.add(content);
+        }
+
+// 3000자 이상 했을때
+        return contents;
+    }
+
+    public List<Document> fixtureDocument(List<Content> contents){
+        List<Document> documents = new ArrayList<>();
+        for(int i =0; i < 10; i++){
+            Document document = new Document();
+            document.setTitle("document"+i);
+            document.setContents(contents);
+            documents.add(document);
+        }
+        return documents;
     }
 
 
