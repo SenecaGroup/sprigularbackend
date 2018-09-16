@@ -5,6 +5,9 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,12 @@ public class Category {
     @ManyToOne
     @JoinColumn(name = "PARENT_ID")
     private Category parent;
+
+    @Max(2) @Min(0)
+    private Integer level;
+
+    @Column(name = "LAST_DOC_UPDATED")
+    private LocalDateTime lastDocumentUpdated;
 
     @OneToMany(mappedBy = "parent",
             fetch = FetchType.EAGER,
