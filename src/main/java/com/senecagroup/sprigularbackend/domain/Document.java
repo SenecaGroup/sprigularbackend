@@ -6,10 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by sm123tt@gmail.com on 2018-09-08
@@ -18,15 +17,15 @@ import java.util.List;
  */
 
 @Entity @Getter @Setter @ToString
-@EqualsAndHashCode(of = {"id", "title"})
 public class Document {
+
+    public static final int INDEX_NOT_FOUND = -1;
+    public static final int FIRST_INDEX = 0;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
-
-    private URL reference;
 
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
@@ -34,34 +33,34 @@ public class Document {
 
     @OneToMany(mappedBy = "document",
     orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Content> contents = new ArrayList<>();
+    private List<Paragraph> paragraphs = new ArrayList<>();
 
-    @OneToMany
-    @JoinColumn(name = "DOCUMENT_ID")
-    private List<Image> images = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "TIME_ID")
+    private Time time;
 
-    private LocalDateTime updatedAt;
+    private Integer views;
 
-    private LocalDateTime createdAt;
+    private Integer reactions;
 
 //    public void setUpdatedAt(LocalDateTime updatedAt) {
 //        if(createdAt.isAfter(updatedAt)) {
 //            throw new TimeException()
 //        }
 //    }
-    public static final int INDEX_NOT_FOUND = -1;
+
 
     /*
         @return Last Index of contents + 1
         If there is no content, it returns 1
     */
     public int nextContentIndex() {
-        int lastIndex = contents
+        int lastIndex = paragraphs
                 .stream()
-                .mapToInt(Content::getIndex)
+                .mapToInt(Paragraph::getIndex)
                 .max()
                 .orElse(INDEX_NOT_FOUND);
-        return lastIndex == INDEX_NOT_FOUND? 0: lastIndex + 1;
+        return lastIndex == INDEX_NOT_FOUND ? FIRST_INDEX : lastIndex + 1;
     }
 
     /*
@@ -71,7 +70,7 @@ public class Document {
         Set content.Category to this
         @return the result of the adding content.
     */
-    public boolean addContent(Content content) {
+    public boolean addParagraph(Paragraph paragraph) {
 //        int index = content.getIndex();
 //        Optional<Content> foundContent = contents.stream()
 //                .filter(_content -> _content.getIndex() == index)
@@ -79,10 +78,18 @@ public class Document {
 //        if(foundContent.isPresent()) {
 //            throw new ContentIndexConflictException("Conflict content index: " + index);
 //        }
-        if(!contents.contains(this) && content.getIndex() == null) {
-            content.setDocument(this);
-            return contents.add(content);
+        if(paragraphs.contains(paragraph)) {
+           return false;
         }
+        if(paragraph.getIndex() != null) {
+            Optional<Paragraph> foundOne = paragraphs.stream()
+                    .filter(_p -> _p.getIndex() == paragraph.getIndex())
+                    .findFirst();
+            if(foundOne.isPresent()) {
+                throw new ContentIndexConflictException("Conflict content index: " + paragraph.getIndex());
+            }
+        }
+
         return false;
     }
 }

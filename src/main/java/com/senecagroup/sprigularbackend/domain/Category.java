@@ -1,9 +1,8 @@
 package com.senecagroup.sprigularbackend.domain;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,8 +14,7 @@ import java.util.List;
  * Github : http://github.com/Siwoo-Kim
  */
 
-@Entity @Getter @Setter @ToString(exclude = "parent")
-@EqualsAndHashCode(of = {"name"})
+@Entity @Getter @Setter
 public class Category {
 
     @Id
@@ -36,6 +34,15 @@ public class Category {
     cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Document> documents = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "TIME_ID")
+    private Time time;
+
+    @Column(name = "root")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    public boolean isRoot() {
+        return parent == null;
+    }
     /*
         If the Category contains @argument the document @return true
         else @return false

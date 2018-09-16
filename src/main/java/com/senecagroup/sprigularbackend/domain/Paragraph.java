@@ -1,6 +1,5 @@
 package com.senecagroup.sprigularbackend.domain;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,25 +8,20 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 
 /**
- * Created by sm123tt@gmail.com on 2018-09-08
+ * Created by sm123tt@gmail.com on 2018-09-16
  * Project: sprigularbackend
  * Github : http://github.com/Siwoo-Kim
  */
 
 @Entity @Getter @Setter @ToString
-@EqualsAndHashCode(of = "id")
-public class Content {
-
-    public enum ContentType {
-        CODE, NORMAL
-    }
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE",
+        discriminatorType = DiscriminatorType.STRING)
+public abstract class Paragraph {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CONTENT_ID")
     private Long id;
-
-    @Enumerated(EnumType.STRING)
-    private ContentType type;
 
     private Integer index;
 
@@ -57,5 +51,4 @@ public class Content {
         this.document = document;
         setIndexFromDocument();
     }
-
 }

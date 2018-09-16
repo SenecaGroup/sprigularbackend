@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.lang.ref.PhantomReference;
@@ -21,7 +18,9 @@ import java.nio.file.Paths;
  */
 @Entity
 @Getter @Setter @ToString
-public class Image {
+@DiscriminatorValue("IMG")
+public class Image extends Paragraph {
+
     private static final Path IMG_PATH = Paths.get("./src/resources/static/image/static/image/");
 
     public enum ImageType {
@@ -37,16 +36,10 @@ public class Image {
         }
     }
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @NotNull
-    private String name;
+    private String location;
 
+    @Transient
     private ImageType imageType;
-
-    public String getImgPath() {
-        return IMG_PATH + name +  imageType.getValue();
-    }
 
 }

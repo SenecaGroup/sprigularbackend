@@ -4,9 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.net.URL;
+import org.springframework.util.Assert;
+
+import javax.persistence.*;
 
 /**
  * Created by sm123tt@gmail.com on 2018-09-08
@@ -15,12 +15,8 @@ import java.net.URL;
  */
 
 @Entity @Getter @Setter @ToString
-@EqualsAndHashCode(of = "name")
-public class Model {
+@DiscriminatorValue("TEXT")
+public class Text extends Paragraph{
 
-    @Id
-    private String name;
-
-    private URL url;
 
 }
