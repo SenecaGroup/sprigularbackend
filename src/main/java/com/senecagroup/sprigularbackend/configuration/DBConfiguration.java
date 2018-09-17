@@ -74,6 +74,7 @@ public class DBConfiguration {
 
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.show_sql", "true");
+        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
         jpaProperties.put("hibernate.enable_lazy_load_no_trans", "true");
         jpaProperties.put("hibernate.max_fetch_depth", "0");
         jpaProperties.put("hibernate.current_session_context_class", "thread");

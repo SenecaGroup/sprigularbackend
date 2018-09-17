@@ -20,6 +20,8 @@ import java.util.List;
 @Entity @Getter @Setter
 public class Category {
 
+    public static final int MAX_LEVEL = 2;
+
     @Id
     private String name;
 
@@ -50,7 +52,7 @@ public class Category {
     @Column(name = "root")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     public boolean isRoot() {
-        return parent == null;
+        return parent == null && level == 0;
     }
     /*
         If the Category contains @argument the document @return true

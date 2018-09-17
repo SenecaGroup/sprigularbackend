@@ -32,6 +32,10 @@ public abstract class Paragraph {
     @Column(length = 3000)
     private String data;
 
+    private void set(Integer index) {
+        this.index = index;
+    }
+
     /*
         Set an index which is calculated from the document
         An index is a last index + 1 in the document.contents

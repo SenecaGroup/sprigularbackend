@@ -39,6 +39,8 @@ public class Document {
     @JoinColumn(name = "TIME_ID")
     private Time time;
 
+    private Integer index;
+
     private Integer views;
 
     private Integer reactions;
@@ -89,7 +91,9 @@ public class Document {
                 throw new ContentIndexConflictException("Conflict content index: " + paragraph.getIndex());
             }
         }
-
-        return false;
+        if(paragraph.getDocument() != this) {
+            paragraph.setDocument(this);
+        }
+        return paragraphs.add(paragraph);
     }
 }

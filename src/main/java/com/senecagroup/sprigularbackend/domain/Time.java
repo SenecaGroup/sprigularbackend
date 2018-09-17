@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -31,6 +32,19 @@ public class Time {
     @JoinColumn(name = "COMPONENT")
     private Component component;
 
+    private enum TimeFormat {
+        CATEGORY("yyyy-MM-dd hh:MM:ss"), PARAGRAPH("yyyyMMdd hh_MM_ss"), DEFAULT("yyyy-MM-dd hh+MM+ss");
+        private String pattern;
+
+        TimeFormat(String pattern) {
+            this.pattern = pattern;
+        }
+
+        public String getPattern() {
+            return this.pattern;
+        }
+    }
+
     private Time() {
     }
 
@@ -39,6 +53,14 @@ public class Time {
         this.updatedDate = updatedDate;
         this.component = component;
     }
+
+//    public String formattedUpdatedDate(LocalDateTime date) {
+//        String name = TimeFormat.valueOf(component.getName()) ;
+//
+//        switch (name) {
+//            case TimeFormat.CATEGORY:
+//        }
+//    }
 
     @Override
     public boolean equals(Object o) {
