@@ -20,7 +20,7 @@ import javax.persistence.*;
 public abstract class Paragraph {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CONTENT_ID")
+    @Column(name = "PARAGRAPH_ID")
     private Long id;
 
     private Integer index;

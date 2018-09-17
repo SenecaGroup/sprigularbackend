@@ -17,6 +17,7 @@ import javax.persistence.*;
 public class Linker {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "LINKER_ID")
     private Long id;
 
     @OneToOne

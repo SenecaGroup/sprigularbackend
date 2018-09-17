@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
@@ -17,7 +18,7 @@ import java.util.Objects;
 @Entity @Getter @Setter @ToString
 public class Component {
 
-    @Id
+    @Id @Column(name = "COMPONENT_NAME")
     private String name;
 
     private String uri;

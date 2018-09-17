@@ -23,6 +23,7 @@ public class Document {
     public static final int FIRST_INDEX = 0;
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DOCUMENT_ID")
     private Long id;
 
     private String title;
