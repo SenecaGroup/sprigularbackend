@@ -1,7 +1,9 @@
 package com.senecagroup.sprigularbackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -17,12 +19,14 @@ import java.util.List;
  * Github : http://github.com/Siwoo-Kim
  */
 
-@Entity @Getter @Setter
+@Entity @Getter @Setter @ToString(exclude = "children")
 public class Category {
 
     public static final int MAX_LEVEL = 2;
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String name;
 
     @ManyToOne
@@ -35,6 +39,7 @@ public class Category {
     @Column(name = "LAST_DOC_UPDATED")
     private LocalDateTime lastDocumentUpdated;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "parent",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
@@ -49,6 +54,7 @@ public class Category {
     @JoinColumn(name = "TIME_ID")
     private Time time;
 
+    @JsonIgnore
     @Column(name = "root")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     public boolean isRoot() {
@@ -96,4 +102,7 @@ public class Category {
         return false;
     }
 
+    public boolean isLeaf() {
+        return level == 2 || children == null || children.isEmpty();
+    }
 }
