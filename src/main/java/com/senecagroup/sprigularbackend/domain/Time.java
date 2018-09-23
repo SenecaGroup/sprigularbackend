@@ -20,7 +20,8 @@ import java.util.Objects;
 @Entity @Table(name = "TIME")
 public class Time {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="time_seq")
+    @SequenceGenerator(name = "time_seq", sequenceName = "time_seq",allocationSize=1)
     @Column(name = "TIME_ID")
     private Long id;
 
