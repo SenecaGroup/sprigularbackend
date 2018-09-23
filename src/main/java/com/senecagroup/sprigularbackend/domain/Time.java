@@ -21,7 +21,7 @@ import java.util.Objects;
 public class Time {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "TIME_ID")
     private Long id;
 
     private LocalDateTime createdDate;
@@ -33,7 +33,9 @@ public class Time {
     private Component component;
 
     private enum TimeFormat {
-        CATEGORY("yyyy-MM-dd hh:MM:ss"), PARAGRAPH("yyyyMMdd hh_MM_ss"), DEFAULT("yyyy-MM-dd hh+MM+ss");
+        CATEGORY("yyyy-MM-dd hh:MM:ss"),
+        PARAGRAPH("yyyyMMdd hh_MM_ss"),
+        DEFAULT("yyyy-MM-dd hh+MM+ss");
         private String pattern;
 
         TimeFormat(String pattern) {
@@ -54,13 +56,15 @@ public class Time {
         this.component = component;
     }
 
-//    public String formattedUpdatedDate(LocalDateTime date) {
-//        String name = TimeFormat.valueOf(component.getName()) ;
-//
-//        switch (name) {
-//            case TimeFormat.CATEGORY:
-//        }
-//    }
+    public String formattedUpdatedDate(LocalDateTime date) {
+        TimeFormat timeFormat = null;
+        try {
+            timeFormat = TimeFormat.valueOf(component.getName().toUpperCase());
+        }catch (IllegalArgumentException e) {
+            timeFormat = TimeFormat.DEFAULT;
+        }
+        return date.format(DateTimeFormatter.ofPattern(timeFormat.getPattern()));
+    }
 
     @Override
     public boolean equals(Object o) {
