@@ -19,7 +19,6 @@ import java.util.Optional;
 @Service(value = "categoryService")
 public class CategoryServiceImpl implements CategoryService {
 
-
     @Inject
     CategoryRepository categoryRepository;
 
@@ -29,22 +28,22 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getChildren(Category category) {
-        return category.getChildren();
-    }
+            public List<Category> getChildren(Category category) {
+                return category.getChildren();
+            }
 
-    @Override
-    public List<Category> getAncestors(Category category) {
-        List<Category> result = new LinkedList<>();
-        getParent(result, category);
-        return result;
-    }
+            @Override
+            public List<Category> getAncestors(Category category) {
+                List<Category> result = new LinkedList<>();
+                getParent(result, category);
+                return result;
+            }
 
-    private void getParent(List<Category> result, Category category) {
-        Category parent = category.getParent();
-        if(parent == null) {
-            return;
-        }
+            private void getParent(List<Category> result, Category category) {
+                Category parent = category.getParent();
+                if(parent == null) {
+                    return;
+                }
         result.add(parent);
         getParent(result, parent);
     }

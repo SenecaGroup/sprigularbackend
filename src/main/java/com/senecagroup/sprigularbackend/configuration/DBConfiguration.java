@@ -27,17 +27,17 @@ public class DBConfiguration {
     @Autowired
     private Environment env;
 
-    @Value("${db.driver}")
-    private String DRIVER;
-
-    @Value("${db.url}")
-    private String URL;
-
-    @Value("${db.username}")
-    private String USERNAME;
-
-    @Value("${db.password}")
-    private String PASSWORD;
+//    @Value("${db.driver}")
+//    private String DRIVER;
+//
+//    @Value("${db.url}")
+//    private String URL;
+//
+//    @Value("${db.username}")
+//    private String USERNAME;
+//
+//    @Value("${db.password}")
+//    private String PASSWORD;
 
     private final Logger log = LoggerFactory.getLogger(DBConfiguration.class);
 
@@ -52,10 +52,10 @@ public class DBConfiguration {
     public DataSource dataSource() {
         log.debug("Configuring Datasource");
         BasicDataSource dataSourceConfig = new BasicDataSource();
-        dataSourceConfig.setDriverClassName(DRIVER);
-        dataSourceConfig.setUrl(URL);
-        dataSourceConfig.setUsername(USERNAME);
-        dataSourceConfig.setPassword(PASSWORD);
+        dataSourceConfig.setDriverClassName("org.postgresql.Driver");
+        dataSourceConfig.setUrl("jdbc:postgresql://localhost:5432/backend");
+        dataSourceConfig.setUsername("sprigular");
+        dataSourceConfig.setPassword("seneca");
 
         return dataSourceConfig;
     }
