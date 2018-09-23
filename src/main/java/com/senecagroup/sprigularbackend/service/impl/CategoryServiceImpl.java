@@ -1,6 +1,7 @@
 package com.senecagroup.sprigularbackend.service.impl;
 
 import com.senecagroup.sprigularbackend.domain.Category;
+import com.senecagroup.sprigularbackend.model.CategorySet;
 import com.senecagroup.sprigularbackend.repository.CategoryRepository;
 import com.senecagroup.sprigularbackend.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,8 @@ import javax.inject.Inject;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by sm123tt@gmail.com on 2018-09-23
@@ -63,4 +66,11 @@ public class CategoryServiceImpl implements CategoryService {
         return category.isLeaf();
     }
 
+    public List<CategorySet> getCategorySet(int level) {
+        List<Category> categories = categoryRepository.findByLevel(level);
+        Set<String> names = categories.stream()
+                .map(Category::getName)
+                .collect(Collectors.toSet());
+        return null;
+    }
 }

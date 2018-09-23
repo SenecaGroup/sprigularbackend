@@ -12,11 +12,6 @@ public class CategorySet {
 
     private final Map<String, Set<Long>> value = new HashMap<>();
 
-    public CategorySet(Set<String> values) {
-        for(String name: values) {
-            value.put(name, new HashSet<>());
-        }
-    }
 
     public int add(String name, long[] ids) {
         Set<Long> categories = getIds(name);

@@ -24,7 +24,8 @@ public class Category {
 
     public static final int MAX_LEVEL = 2;
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
+    @SequenceGenerator(name = "category_seq", sequenceName = "category_seq",allocationSize=1)
     private Long id;
 
     private String name;
