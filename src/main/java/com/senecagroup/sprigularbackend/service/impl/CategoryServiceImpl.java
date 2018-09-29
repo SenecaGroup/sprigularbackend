@@ -66,6 +66,18 @@ public class CategoryServiceImpl implements CategoryService {
         return category.isLeaf();
     }
 
+    @Override
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<Category> getChildren(Long id) {
+        return getCategory(id)
+                .map(parent -> getChildren(parent))
+                .orElse(null);
+    }
+
     public List<CategorySet> getCategorySet(int level) {
         List<Category> categories = categoryRepository.findByLevel(level);
         Set<String> names = categories.stream()

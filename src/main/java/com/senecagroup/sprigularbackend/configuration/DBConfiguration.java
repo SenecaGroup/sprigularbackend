@@ -79,7 +79,7 @@ public class DBConfiguration {
         jpaProperties.put("hibernate.max_fetch_depth", "0");
         jpaProperties.put("hibernate.current_session_context_class", "thread");
         jpaProperties.put("hibernate.event.merge.entity_copy_observer", "allow");
-        jpaProperties.put("hibernate.hbm2ddl.auto", "create");
+        jpaProperties.put("hibernate.hbm2ddl.auto", "update");
 
         factory.setJpaProperties(jpaProperties);
         factory.afterPropertiesSet();
