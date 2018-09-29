@@ -12,6 +12,7 @@ import java.util.Optional;
  */
 
 public interface CategoryService {
+
     Optional<Category> getCategory(long id);
 
     List<Category> getChildren(Category category);
@@ -21,4 +22,8 @@ public interface CategoryService {
     Category getRoot(Category category);
 
     boolean isLeaf(Category category);
+
+    List<Category> getCategories();
+
+    List<Category> getChildren(Long id);
 }

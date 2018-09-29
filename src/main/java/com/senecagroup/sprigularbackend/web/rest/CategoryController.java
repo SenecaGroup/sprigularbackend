@@ -1,11 +1,13 @@
 package com.senecagroup.sprigularbackend.web.rest;
 
 import com.senecagroup.sprigularbackend.domain.Category;
-import org.hibernate.service.spi.InjectService;
+import com.senecagroup.sprigularbackend.service.CategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -14,15 +16,26 @@ import java.util.List;
  * Github : http://github.com/Siwoo-Kim
  */
 
-@RestController("/category")
+@RestController
+@RequestMapping("/category")
 public class CategoryController {
+
+    @Inject
+    CategoryService categoryService;
 
     @GetMapping
     public List<Category> categories() {
-        List<Category> categories = new ArrayList<>();
-        Category category = new Category();
-        category.setName("dummy");
-        categories.add(category);
-        return categories;
+        return categoryService.getCategories();
     }
+
+    @GetMapping("/{id}")
+    public Category category(@PathVariable Long id) {
+        return categoryService.getCategory(id).orElse(null);
+    }
+
+    @GetMapping("/children/{id}")
+    public List<Category> children(@PathVariable Long id) {
+        return categoryService.getChildren(id);
+    }
+
 }
