@@ -1,0 +1,150 @@
+BEGIN TRANSACTION; -- save from here 
+
+-- Level 0 in Category ()
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Java', 0, NULL, NULL);
+
+-- Level 1 in Category ('category/Java')
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Install Java',1,
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Java'), NULL);
+         
+
+-- Level 2 in Category ('category/Java/Install Java/') // 4 Children
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Install Java on Linux', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Install Java'), NULL); -- Install Java's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Install Java by downloading on Linux', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Install Java'), NULL); -- Install Java's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Install Java on Windows', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Install Java'), NULL); -- Install Java's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Install Java on OSX', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Install Java'), NULL); -- Install Java's Child
+
+   
+-- Level 1 in Category ('category/Java')
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Execution',1,
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Java'), NULL);
+         
+         
+-- Level 2 in Category ('category/Java/Execution/') // 3 Children
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Execute Java on Linux', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Execution'), NULL); -- Execution's Child         
+      
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Execute Java on OSX', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Execution'), NULL); -- Execution's Child   
+   
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Execute Java on Windows ', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Execution'), NULL); -- Execution's Child   
+
+
+-- Level 1 in Category ('category/Java')
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Eclipse',1,
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Java'), NULL);
+   
+
+-- Level 2 in Category ('category/Java/ Eclipse /') // 3 Children
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Install and Execute Eclipse on OSX', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = ' Eclipse'), NULL); -- Eclipse's Child         
+      
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Install and Execute Eclipse on Windows', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Eclipse'), NULL); -- Eclipse's Child   
+   
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Install and Execute Eclipse on Linux', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Eclipse '), NULL); -- Eclipse's Child
+   
+   
+-- Level 1 in Category ('category/Java')
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Eclipse features and examples',1,
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Java'), NULL);   
+
+
+   
+-- Level 0 in Category ()
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'JavaScript', 0, NULL, NULL);
+
+
+-- Level 1 in Category ('category/JavaScript')
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Introduction ',1,
+   (SELECT ID FROM CATEGORY WHERE NAME = 'JavaScript'), NULL);
+         
+
+-- Level 1 in Category ('category/JavaScript')
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Basic JavaScript',1,
+   (SELECT ID FROM CATEGORY WHERE NAME = 'JavaScript'), NULL);
+
+
+-- Level 2 in Category ('category/JavaScript/Basic JavaScript /') // 14 Children
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Execution and Environment', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), ' Number and Character ', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Variable', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Comment', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Next line and Space', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Compare', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Conditional statement', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Loop', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Function', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Array', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Object', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- 'Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Module', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'UI and API', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
+
+INSERT INTO CATEGORY(ID, NAME, LEVEL, PARENT_ID, TIME_ID )
+   VALUES(NEXTVAL('category_seq'), 'Regular Expression', 2, 
+   (SELECT ID FROM CATEGORY WHERE NAME = 'Basic JavaScript'), NULL); -- Basic JavaScript's Child
