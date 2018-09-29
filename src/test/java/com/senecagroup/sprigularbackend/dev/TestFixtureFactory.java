@@ -1,9 +1,11 @@
 package com.senecagroup.sprigularbackend.dev;
 
+import com.senecagroup.sprigularbackend.tester.FixtureFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertFalse;
@@ -20,22 +22,5 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 public class TestFixtureFactory {
 
-    @Autowired
-    FixtureFactory fixtureFactory;
 
-    @Test
-    public void testFixtureModels() {
-        assertNotNull(fixtureFactory.fixtureModels());
-        assertFalse(fixtureFactory.fixtureModels().isEmpty());
-        //fixtureFactory.fixtureModels().forEach(System.out::println);
-    }
-
-    @Test
-    public void testFixtureCategories() {
-        assertNotNull(fixtureFactory.fixtureCategories());
-        assertFalse(fixtureFactory.fixtureCategories().isEmpty());
-        fixtureFactory.fixtureCategories()
-                .stream()
-                .forEach(System.out::println);
-    }
 }
