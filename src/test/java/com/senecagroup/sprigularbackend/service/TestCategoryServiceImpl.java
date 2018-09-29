@@ -7,6 +7,7 @@ import com.senecagroup.sprigularbackend.domain.Component;
 import com.senecagroup.sprigularbackend.domain.Time;
 import com.senecagroup.sprigularbackend.repository.CategoryRepository;
 import com.senecagroup.sprigularbackend.tester.FixtureFactory;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,8 @@ import java.util.function.Consumer;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by bobsang89@gmail.com on 2018-09-23
@@ -44,9 +47,15 @@ public class TestCategoryServiceImpl {
     @Inject
     CategoryService service;
     List<Category> mock;
+    Category parent;
+    Category firstChild;
+    Category leafChild;
+
     @Before
     public void setup() {
         mock = new ArrayList<>();
+
+
         LocalDateTime t = LocalDateTime.now();
         Component com = new Component();
         Time time = new Time(t,t, com);
@@ -100,16 +109,18 @@ public class TestCategoryServiceImpl {
         c2.addChild(c2_1);
         mock.add(c2);
 
+        categoryRepository.saveAll(mock);
+        parent = mock.get(0);
+        firstChild = parent.getChildren().get(0);
+        leafChild = firstChild.getChildren().get(0);
     }
 
 
     @Transactional
     @Test
     public void getCategory() {
-        categoryRepository.saveAll(mock);
-        Category category = service.getCategory(mock.get(0).getId()).orElse(null);
-        assertTrue(category.getId() == mock.get(0).getId());
-        assertEquals(category, mock.get(0));
+        assertTrue(parent.getId() == mock.get(0).getId());
+        assertEquals(parent, mock.get(0));
 
         profiling(s -> s.getCategory(mock.get(0).getId()), "getCategory");
     }
@@ -117,20 +128,20 @@ public class TestCategoryServiceImpl {
     @Transactional
     @Test
     public void getChildren(){
-        categoryRepository.saveAll(mock);
-        List<Category> category = service.getChildren(mock.get(0));
-        assertTrue(category.contains(mock.get(0).getChildren().get(0)));
+        List<Category> children = service.getChildren(parent);
+        assertTrue(children.contains(firstChild));
+        List<Category> grandChildren = service.getChildren(firstChild);
+        assertTrue(grandChildren.contains(leafChild));
 
-        profiling(s -> s.getChildren(mock.get(0)), "getChild");
+        profiling(s -> s.getChildren(mock.get(0)), "getChildren");
     }
 
     @Transactional
     @Test
     public void getAncestors(){
-        categoryRepository.saveAll(mock);
-        List<Category> category = service.getAncestors(mock.get(0).getChildren().get(0).getChildren().get(0));
-        assertTrue(category.contains(mock.get(0)));
-        assertTrue(category.contains(mock.get(0).getChildren().get(0)));
+        List<Category> ancestors = service.getAncestors(leafChild);
+        assertTrue(ancestors.contains(parent));
+        assertTrue(ancestors.contains(firstChild));
 
         profiling(s -> s.getAncestors(mock.get(0).getChildren().get(0).getChildren().get(0)), "getAncestors");
     }
@@ -138,11 +149,9 @@ public class TestCategoryServiceImpl {
     @Transactional
     @Test
     public void getRoot(){
-        categoryRepository.saveAll(mock);
-        Category category = service.getRoot(mock.get(0).getChildren().get(0));
-        assertEquals(category, mock.get(0));
-        category = service.getRoot(mock.get(0).getChildren().get(0).getChildren().get(0));
-        assertEquals(category, mock.get(0));
+        Category root = service.getRoot(leafChild);
+        assertEquals(parent, root);
+        assertNotEquals(firstChild, root);
 
         profiling(s -> s.getRoot(mock.get(0).getChildren().get(0)), "getRoot");
     }
@@ -150,10 +159,9 @@ public class TestCategoryServiceImpl {
     @Transactional
     @Test
     public void isLeaf(){
-        categoryRepository.saveAll(mock);
-        assertFalse(service.isLeaf(mock.get(0)));
-        assertFalse(service.isLeaf(mock.get(0).getChildren().get(0)));
-        assertTrue(service.isLeaf((mock.get(0).getChildren().get(0).getChildren().get(0))));
+        assertTrue(leafChild.isLeaf());
+        assertFalse(firstChild.isLeaf());
+        assertFalse(parent.isLeaf());
 
         profiling(s -> s.isLeaf(mock.get(0)), "isLeaf");
     }
