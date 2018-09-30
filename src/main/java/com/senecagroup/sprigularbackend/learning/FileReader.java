@@ -1,8 +1,5 @@
 package com.senecagroup.sprigularbackend.learning;
 
-
-import org.springframework.data.jpa.repository.Query;
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -13,14 +10,17 @@ import java.util.Scanner;
  */
 public class FileReader {
 
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
 
+    public static void main(String[] args) throws IOException {
         BufferedReader dump = new BufferedReader(new InputStreamReader(new FileInputStream("./dump.txt"), "UTF-8"));
         Scanner scan = new Scanner(dump);
+        StringBuilder sb = new StringBuilder();
         while (scan.hasNextLine()) {
-            StringBuilder sb = new StringBuilder(scan.nextLine());
-            System.out.println(sb);
+            sb.append(scan.nextLine());
         }
+        System.out.println(sb);
     }
 }
+
+
 
